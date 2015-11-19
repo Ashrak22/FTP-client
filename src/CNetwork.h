@@ -26,7 +26,7 @@ using namespace std;
 
 class CNetwork
 {
-///CNetwork is meant to provide encapsulation to difficult C Socket Library. This class is derived from my Homework for the BI-PSI course.
+///CNetwork is meant to provide encapsulation to difficult C Socket Library.
 public:
     CNetwork();
     int init(short port, const char * address);

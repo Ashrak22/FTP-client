@@ -24,7 +24,7 @@ CNetwork::CNetwork() {
 int CNetwork::init(short port, const char * address) {
     ///Create socket as filedescriptor and specify it as TCP socket. 
     if ((sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) == -1) {
-        perror("nelze vytvorit socket");
+        perror("Can't create socket'");
         exit(1);
     }
     memset((void *) &sin, 0, sizeof (sin));
@@ -57,7 +57,7 @@ int CNetwork::init(short port, const char * address) {
 */
 int CNetwork::send_data(int len, string & pBuf) {
     if (write(sock, pBuf.c_str(), len) != len) {
-        perror("chyba pri zapisu");
+        perror("Error while writing into socket");
         return -1;
     } else return len;
 }
@@ -69,7 +69,7 @@ int CNetwork::send_data(int len, string & pBuf) {
 */
 int CNetwork::send_data(int len, unsigned char * pBuf) {
     if (write(sock, pBuf, len) != len) {
-        perror("chyba pri zapisu");
+        perror("Error while writing into socket");
         return -1;
     } else return len;
 }
@@ -105,11 +105,9 @@ int CNetwork::receive_data(int len, unsigned char *& pBuf) {
     pBuf = new unsigned char[len];
     memset(pBuf, 0, len);
     if ((length = read(sock, pBuf, len)) <= 0) {
-        //if(i == 1) printf("Do haje!\n");
-        perror("chyba pri cteni");
+        perror("Error while reading from socket");
         return -1;
     }
-    //cout << "Received " << length << " bytes of data." << endl;
     return length;
 }
 /*!
